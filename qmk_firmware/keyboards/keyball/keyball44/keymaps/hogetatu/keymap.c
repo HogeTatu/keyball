@@ -53,9 +53,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [4] = LAYOUT_universal(
     _______  , _______  , _______  , _______  , _______  , _______  ,                                        _______  , _______  , _______  , _______  , _______  , _______  ,
-    _______  , _______  , _______  , _______  , _______  , _______  ,                                        _______  , _______  , _______  , KC_BTN2  , _______  , _______  ,
-    _______  , _______  , _______  , _______  , _______  , _______  ,                                        _______  , _______  , KC_BTN1  , KC_BTN3  , _______  , _______  ,
-                  _______    , _______  , _______  ,        _______  , _______  ,                   _______  , _______  , _______       , _______  , _______
+    _______  , _______  , _______  , _______  , _______  , _______  ,                                        _______  , _______  , KC_BTN2  , KC_BTN3  , _______  , _______  ,
+    _______  , _______  , _______  , _______  , _______  , _______  ,                                        _______  , KC_BTN1  , _______  , _______  , _______  , _______  ,
+                  _______    , _______  , _______  ,        _______  , _______  ,                   _______  , QK_KB_7  , _______       , _______  , _______
   ),
 };
 // clang-format on
@@ -67,6 +67,10 @@ layer_state_t layer_state_set_user(layer_state_t state) {
       set_auto_mouse_enable(false);
       keyball_set_scroll_mode(true);
     }
+    else if (get_highest_layer(state) == 4 && keyball_get_scroll_mode()) {
+      state = remove_auto_mouse_layer(state, false);
+      set_auto_mouse_enable(false);
+    }
     else {
       set_auto_mouse_enable(true);
       keyball_set_scroll_mode(false);
@@ -76,6 +80,13 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 void pointing_device_init_user(void) {
     set_auto_mouse_enable(true);         // always required before the auto mouse feature will work
+}
+
+bool is_mouse_record_user(uint16_t keycode, keyrecord_t* record) {
+    if (keycode == SCRL_TO || keycode == SCRL_MO) {
+      return true;
+    }
+    return false;
 }
 
 #ifdef OLED_ENABLE
