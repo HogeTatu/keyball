@@ -20,29 +20,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
+enum user_keycodes {
+    MOUSE_END = QK_USER_0,
+};
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default (VIA)
   [0] = LAYOUT_universal(
-    KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                        KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , KC_DEL   ,
-    KC_TAB   , KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , S(KC_7)  ,
+    KC_TAB   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                        KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , KC_BSPC  ,
+    KC_LCTL  , KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , KC_QUOT  ,
     KC_LSFT  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                        KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , KC_INT1  ,
-              KC_LALT,KC_LGUI,LCTL_T(KC_LNG2)     ,LT(1,KC_SPC),LT(3,KC_LNG1),                  KC_BSPC,LT(2,KC_ENT), RCTL_T(KC_LNG2),     KC_RALT  , KC_PSCR
+                 KC_LWIN,KC_LALT,LT(3,KC_GRAVE)       ,LT(4,KC_SPC),KC_RCTL,                   LT(2,KC_ENT),LT(1,KC_SPC), _______      , _______  , KC_PSCR
   ),
 
   [1] = LAYOUT_universal(
-    _______  ,  KC_F1   , KC_F2    , KC_F3   , KC_F4    , KC_F5    ,                                         KC_F6    , KC_F7    , KC_F8    , KC_F9    , KC_F10   , KC_F11   ,
-    _______  ,  _______ , _______  , KC_UP   , KC_ENT   , KC_DEL   ,                                         KC_PGUP  , KC_BTN1  , KC_UP    , KC_BTN2  , KC_BTN3  , KC_F12   ,
-    _______  ,  _______ , KC_LEFT  , KC_DOWN , KC_RGHT  , KC_BSPC  ,                                         KC_PGDN  , KC_LEFT  , KC_DOWN  , KC_RGHT  , _______  , _______  ,
-                  _______  , _______ , _______  ,         _______  , _______  ,                   _______  , _______  , _______       , _______  , _______
+    KC_ESC   , KC_PSLS   , KC_PAST  , KC_PMNS  , KC_PPLS  , _______  ,                                        _______  , _______  , _______  , _______  , _______  , KC_DEL  ,
+    _______  , KC_1      , KC_2     , KC_3     , KC_4     , KC_5     ,                                        _______  , KC_MINS  , KC_EQL   , KC_INT3  , _______  , _______  ,
+    _______  , KC_6      , KC_7     , KC_8     , KC_9     , KC_0     ,                                        _______  , KC_RBRC  , KC_BSLS  , KC_LBRC  , _______  , _______  ,
+                  _______  , _______ , _______  ,         MO(5)    , _______  ,                    _______  , _______  , _______       , _______  , KC_PAUS
   ),
 
   [2] = LAYOUT_universal(
-    _______  ,S(KC_QUOT), KC_7     , KC_8    , KC_9     , S(KC_8)  ,                                         S(KC_9)  , S(KC_1)  , S(KC_6)  , KC_LBRC  , S(KC_4)  , _______  ,
-    _______  ,S(KC_SCLN), KC_4     , KC_5    , KC_6     , KC_RBRC  ,                                         KC_NUHS  , KC_MINS  , S(KC_EQL), S(KC_3)  , KC_QUOT  , S(KC_2)  ,
-    _______  ,S(KC_MINS), KC_1     , KC_2    , KC_3     ,S(KC_RBRC),                                        S(KC_NUHS),S(KC_INT1), KC_EQL   ,S(KC_LBRC),S(KC_SLSH),S(KC_INT3),
-                  KC_0     , KC_DOT  , _______  ,         _______  , _______  ,                   KC_DEL   , _______  , _______       , _______  , _______
-  ),
+    _______  ,  _______  , _______  , _______  , _______  , _______  ,                                        _______  , _______  , _______  , _______  , _______  , _______  ,
+    _______  , S(KC_1)   , S(KC_2)  , S(KC_3)  , S(KC_4)  , S(KC_5)  ,                                        _______  ,S(KC_MINS),S(KC_EQL) ,S(KC_INT3), _______  , _______  ,
+    _______  , S(KC_6)   , S(KC_7)  , S(KC_8)  , S(KC_9)  , S(KC_0)  ,                                        _______  ,S(KC_RBRC),S(KC_BSLS),S(KC_LBRC), _______  , _______  ,
+                  _______  , _______ , _______  ,         _______  , _______  ,                    _______  , _______  , _______       , _______  , _______
+  )
 
   [3] = LAYOUT_universal(
     RGB_TOG  , _______  , _______  , _______  , _______  , _______  ,                                        RGB_M_P  , RGB_M_B  , RGB_M_R  , RGB_M_SW , RGB_M_SN , RGB_M_K  ,
@@ -52,24 +56,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [4] = LAYOUT_universal(
-    _______  , _______  , _______  , _______  , _______  , _______  ,                                        _______  , _______  , _______  , _______  , _______  , _______  ,
-    _______  , _______  , _______  , _______  , _______  , _______  ,                                        _______  , _______  , _______  , _______  , _______  , _______  ,
-    _______  , _______  , _______  , _______  , _______  , _______  ,                                        _______  , _______  , _______  , _______  , _______  , _______  ,
-                  _______    , _______  , _______  ,        _______  , _______  ,                   _______  , _______  , _______       , _______  , _______
+    KC_ESC   ,  _______   , KC_F1    , KC_F2   , KC_F3    , KC_F4    ,                                         _______  , _______  , _______  , _______  , KC_INS   , KC_DEL  ,
+    _______  ,  _______   , KC_F5    , KC_F6   , KC_F7    , KC_F8    ,                                         KC_PGUP  , KC_HOME  , KC_UP    , KC_END   , _______  , _______  ,
+    _______  ,  _______   , KC_F9    , KC_F10  , KC_F11   , KC_F12   ,                                         KC_PGDN  , KC_LEFT  , KC_DOWN  , KC_RGHT  , _______  , _______  ,
+                  _______  , _______ , _______  ,         _______  , _______  ,                   KC_RSFT  , MO(5)    , _______       , _______  , KC_PAUS
   ),
 
   [5] = LAYOUT_universal(
-    _______  , _______  , _______  , _______  , _______  , _______  ,                                        _______  , _______  , _______  , _______  , _______  , _______  ,
-    _______  , _______  , _______  , _______  , _______  , _______  ,                                        _______  , _______  , _______  , _______  , _______  , _______  ,
-    _______  , _______  , _______  , _______  , _______  , _______  ,                                        _______  , _______  , _______  , _______  , _______  , _______  ,
-                  _______    , _______  , _______  ,        _______  , _______  ,                   _______  , _______  , _______       , _______  , _______
+    _______  ,  _______  , _______  , _______  , _______  , _______  ,                                      _______  , _______  , _______  , _______  , _______  , _______  ,
+    _______  ,  _______  , _______  , _______  , _______  , _______  ,                                      _______  , _______  , _______  , _______  , _______  , _______  ,
+    _______  ,  _______  , _______  , _______  , _______  , _______  ,                                      _______  , _______  , _______  , _______  , _______  , _______  ,
+                  _______  , _______ , _______  ,         _______  , _______  ,                    _______  , _______  , _______       , _______  , _______
   ),
 
   [6] = LAYOUT_universal(
-    _______  , _______  , _______  , _______  , _______  , _______  ,                                        _______  , _______  , _______  , _______  , _______  , _______  ,
-    _______  , _______  , _______  , _______  , _______  , _______  ,                                        _______  , _______  , KC_BTN2  , KC_BTN3  , _______  , _______  ,
-    _______  , _______  , _______  , _______  , _______  , _______  ,                                        _______  , KC_BTN1  , _______  , _______  , _______  , _______  ,
-                  _______    , _______  , _______  ,        _______  , _______  ,                   _______  , QK_KB_7  , _______       , _______  , _______
+    _______  ,  _______   , KC_F1    , KC_F2   , KC_F3    , KC_F4    ,                                     _______  , _______  , _______  , _______  , _______  , _______  ,
+    _______  ,  _______   , KC_F5    , KC_F6   , KC_F7    , KC_F8    ,                                     _______  , _______  , _______  , KC_BTN2  , KC_BTN3  , _______  ,
+    _______  ,  _______   , KC_F9    , KC_F10  , KC_F11   , KC_F12   ,                                     _______  , _______  , KC_BTN1  , _______  , _______  , _______  ,
+                  _______  , _______ , _______  ,         SCRL_TO  , _______  ,                   _______  , MOUSE_END , _______       , _______  , _______
   ),
 };
 // clang-format on
@@ -101,6 +105,18 @@ bool is_mouse_record_user(uint16_t keycode, keyrecord_t* record) {
       return true;
     }
     return false;
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+      case MOUSE_END: {
+          auto_mouse_layer_off();
+        }
+        return false;
+      default:
+        break;
+    }
+    return true;
 }
 
 #ifdef OLED_ENABLE
