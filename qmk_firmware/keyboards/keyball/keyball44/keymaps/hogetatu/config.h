@@ -34,6 +34,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #define TAP_CODE_DELAY 5
+#define TAPPING_TERM 50
+#define RETRO_TAPPING
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT 7
 #define POINTING_DEVICE_AUTO_MOUSE_ENABLE
