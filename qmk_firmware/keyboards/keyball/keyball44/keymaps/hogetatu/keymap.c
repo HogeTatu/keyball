@@ -113,6 +113,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           auto_mouse_layer_off();
         }
         return false;
+      case KC_LEFT_CTRL ... KC_RIGHT_GUI: {
+          auto_mouse_layer_off();
+        }
+        break;
       default:
         break;
     }
